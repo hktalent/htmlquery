@@ -7,6 +7,7 @@ import (
 	"bufio"
 	"compress/gzip"
 	"compress/zlib"
+	"crypto/tls"
 	"fmt"
 	"io"
 	"net/http"
@@ -92,13 +93,18 @@ func QuerySelectorAll(top *html.Node, selector *xpath.Expr) []*html.Node {
 
 // LoadURL loads the HTML document from the specified URL. Default enabling gzip on a HTTP request.
 func LoadURL(url string) (*html.Node, error) {
+	tr := &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
+	// 创建一个自定义的HTTP客户端
+	client := &http.Client{
+		Transport: tr,
+	}
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err
 	}
 	// Enable gzip compression.
 	req.Header.Add("Accept-Encoding", "gzip")
-	resp, err := http.DefaultClient.Do(req)
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}

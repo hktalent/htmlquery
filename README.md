@@ -2,8 +2,12 @@ htmlquery
 ====
 [![Build Status](https://travis-ci.org/antchfx/htmlquery.svg?branch=master)](https://travis-ci.org/antchfx/htmlquery)
 [![Coverage Status](https://coveralls.io/repos/github/antchfx/htmlquery/badge.svg?branch=master)](https://coveralls.io/github/antchfx/htmlquery?branch=master)
-[![GoDoc](https://godoc.org/github.com/antchfx/htmlquery?status.svg)](https://godoc.org/github.com/antchfx/htmlquery)
-[![Go Report Card](https://goreportcard.com/badge/github.com/antchfx/htmlquery)](https://goreportcard.com/report/github.com/antchfx/htmlquery)
+[![GoDoc](https://godoc.org/github.com/hktalent/htmlquery?status.svg)](https://godoc.org/github.com/hktalent/htmlquery)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hktalent/htmlquery)](https://goreportcard.com/report/github.com/hktalent/htmlquery)
+
+What Features
+====
+- InsecureSkipVerify: true
 
 Overview
 ====
@@ -18,7 +22,7 @@ XPath query packages for Go
 ===
 | Name                                              | Description                               |
 | ------------------------------------------------- | ----------------------------------------- |
-| [htmlquery](https://github.com/antchfx/htmlquery) | XPath query package for the HTML document |
+| [htmlquery](https://github.com/hktalent/htmlquery) | XPath query package for the HTML document |
 | [xmlquery](https://github.com/antchfx/xmlquery)   | XPath query package for the XML document  |
 | [jsonquery](https://github.com/antchfx/jsonquery) | XPath query package for the JSON document |
 
@@ -26,7 +30,7 @@ Installation
 ====
 
 ```
-go get github.com/antchfx/htmlquery
+go get github.com/hktalent/htmlquery
 ```
 
 Getting Started
@@ -147,7 +151,7 @@ Cache a query expression object(or reused) will avoid re-compile XPath query exp
 ```
 goos: windows
 goarch: amd64
-pkg: github.com/antchfx/htmlquery
+pkg: github.com/hktalent/htmlquery
 BenchmarkSelectorCache-4                20000000                55.2 ns/op
 BenchmarkDisableSelectorCache-4           500000              3162 ns/op
 ```
