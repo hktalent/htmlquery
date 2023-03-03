@@ -8,6 +8,7 @@ htmlquery
 What Features
 ====
 - InsecureSkipVerify: true
+- LoadURLWithPost(url string, szPost string, isPostJson bool)
 
 Overview
 ====
