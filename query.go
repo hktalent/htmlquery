@@ -91,19 +91,28 @@ func QuerySelectorAll(top *html.Node, selector *xpath.Expr) []*html.Node {
 	return elems
 }
 
-// LoadURL loads the HTML document from the specified URL. Default enabling gzip on a HTTP request.
-func LoadURL(url string) (*html.Node, error) {
+func LoadURLWithPost(url string, szPost string, isPostJson bool) (*html.Node, error) {
 	tr := &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
 	// 创建一个自定义的HTTP客户端
 	client := &http.Client{
 		Transport: tr,
 	}
-	req, err := http.NewRequest("GET", url, nil)
+	var oData io.Reader = nil
+	var szMethod string = "GET"
+	if 0 < len(szPost) {
+		oData = strings.NewReader(szPost)
+		szMethod = "POST"
+	}
+	req, err := http.NewRequest(szMethod, url, oData)
 	if err != nil {
 		return nil, err
 	}
 	// Enable gzip compression.
 	req.Header.Add("Accept-Encoding", "gzip")
+	if isPostJson {
+		req.Header.Add("Content-Type", "application/json; charset=utf-8")
+
+	}
 	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
@@ -138,6 +147,11 @@ func LoadURL(url string) (*html.Node, error) {
 		return nil, err
 	}
 	return html.Parse(r)
+}
+
+// LoadURL loads the HTML document from the specified URL. Default enabling gzip on a HTTP request.
+func LoadURL(url string) (*html.Node, error) {
+	return LoadURLWithPost(url, "", false)
 }
 
 // LoadDoc loads the HTML document from the specified file path.
